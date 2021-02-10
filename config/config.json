@@ -1,0 +1,15 @@
+{
+  "theme": {
+    "slug": "ccl",
+    "name": "Chester County Life",
+    "author": "Goodness Creative"
+  },
+  "dev": {
+    "browserSync": {
+      "live": true,
+      "proxyURL": "chestercounty-life.local",
+      "bypassPort": "8181",
+      "https": true
+    }
+  }
+}
