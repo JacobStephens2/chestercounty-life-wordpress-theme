@@ -27,6 +27,8 @@ if ( is_home() ) {
 
 		<?php
 
+		// Get block editor content.
+
 		if ( have_posts() ) {
 
 			get_template_part( 'template-parts/content/page_header' );
@@ -43,24 +45,12 @@ if ( is_home() ) {
 			get_template_part( 'template-parts/content/error' );
 		}
 
-		?>
+		// Paginate.
 
-		<?php
-
-		// $args = array(
-		// 	'tag' => 'featured-article',
-		// );
-
-		// $my_query = new WP_Query( $args );
-
-		// while ( $my_query->have_posts() ) {
-		// 	$my_query->the_post();
-		// 	get_template_part( 'template-parts/content/entry_front_page', $my_query->get_post_type() );
-		// }
-
-		// get_template_part( 'template-parts/content/pagination' );
+		get_template_part( 'template-parts/content/pagination' );
 
 		?>
+
 
 	</main><!-- #primary -->
 <?php
