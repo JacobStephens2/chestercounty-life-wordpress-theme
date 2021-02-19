@@ -56,4 +56,3 @@ if ( is_home() ) {
 <?php
 get_footer();
 
-

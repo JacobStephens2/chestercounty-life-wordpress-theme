@@ -2,6 +2,10 @@
 
 I am using WP Rig to develop a WordPress theme for Chester County Life's new website.
 
+## Change notes
+
+-   Disabled the_post_thumbnail() in entry_thumbnail.php to prevent featured image from displaying on post pages.
+
 <img align="right" width="90" height="90"
      src="https://avatars1.githubusercontent.com/u/38340689"
      title="WP Rig logo by Morten Rand-Hendriksen">
