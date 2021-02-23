@@ -28,7 +28,7 @@ wp_rig()->print_styles( 'wp-rig-content' );
 
 			while ( have_posts() ) {
 				the_post();
-				get_template_part( 'template-parts/content/entry', get_post_type() );
+				get_template_part( 'template-parts/content/entry_no_header', get_post_type() );
 			}
 
 			if ( ! is_singular() ) {

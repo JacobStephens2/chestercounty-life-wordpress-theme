@@ -12,6 +12,8 @@ namespace WP_Rig\WP_Rig;
 <div class="site-branding">
 	<?php the_custom_logo(); ?>
 
+	<?php get_template_part( 'template-parts/header/navigation' ); ?>
+
 	<?php
 	if ( is_front_page() && is_home() ) {
 		?>
@@ -34,4 +36,6 @@ namespace WP_Rig\WP_Rig;
 		<?php
 	}
 	?>
+
+
 </div><!-- .site-branding -->

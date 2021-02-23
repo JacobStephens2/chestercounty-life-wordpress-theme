@@ -3,7 +3,6 @@
  */
 
 @media (--sidebar-query) {
-
 	.site {
 		margin: 0 1em;
 		display: grid;
@@ -52,5 +51,8 @@
 		border-top: 1px solid var(--global-font-color);
 		border-bottom: none;
 	}
+}
 
+._df_thumb {
+	width: 100%;
 }

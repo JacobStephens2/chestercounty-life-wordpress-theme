@@ -18,6 +18,7 @@ namespace WP_Rig\WP_Rig;
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
+
 <?php wp_footer(); ?>
 
 </body>

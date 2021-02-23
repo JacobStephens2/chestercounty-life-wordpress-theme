@@ -76,4 +76,5 @@ class Component implements Component_Interface {
 
 		echo '<style type="text/css">.site-title a, .site-description { color: #' . esc_attr( $header_text_color ) . '; }</style>';
 	}
+
 }

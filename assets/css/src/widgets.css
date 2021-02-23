@@ -4,6 +4,7 @@
 
 .widget-title {
 	font-size: 1.5em;
+	text-transform: uppercase;
 }
 
 /* Make sure select elements fit in widgets. */
