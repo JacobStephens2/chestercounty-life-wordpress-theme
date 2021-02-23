@@ -15,8 +15,6 @@ namespace WP_Rig\WP_Rig;
 
 	get_template_part( 'template-parts/content/entry_front_page_header', get_post_type() );
 
-	get_template_part( 'template-parts/content/entry_front_page_footer', get_post_type() );
-
 	?>
 </article><!-- #post-<?php the_ID(); ?> -->
 

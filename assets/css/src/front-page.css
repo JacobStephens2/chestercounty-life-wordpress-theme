@@ -4,4 +4,58 @@
 
 ._df_thumb {
 	width: 100%;
+	height: 560px;
+	margin-top: 0;
+}
+
+.entry-header {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 1fr 7fr;
+	grid-template-areas:
+		"photo category"
+		"photo title";
+	row-gap: 0.5rem;
+	column-gap: 3rem;
+	margin: 0;
+}
+
+.post-thumbnail {
+	grid-area: photo;
+	display: flex;
+	align-items: center;
+}
+
+.wp-post-image {
+	width: 100%;
+	height: auto;
+}
+
+.entry-title {
+	grid-area: title;
+	margin: 0;
+	margin-bottom: 1rem;
+}
+
+.entry-footer {
+	grid-area: category;
+	height: 0px;
+	padding: 0;
+	margin: 0;
+}
+
+.entry-footer {
+	border-bottom: 0px;
+}
+
+.entry-taxonomies {
+	height: 0;
+}
+
+.site-header {
+	padding-bottom: 0;
+}
+
+h2 {
+	margin-top: 0;
 }

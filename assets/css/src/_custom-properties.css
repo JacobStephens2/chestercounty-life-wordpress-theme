@@ -26,9 +26,9 @@
 	--global-font-color: #333;
 	--border-color-dark: #333;
 	--border-color-light: #ccc;
-	--color-link: #0073aa;
-	--color-link-visited: #333;
-	--color-link-active: #00a0d2;
+	/* --color-link: #d2232a;
+	--color-link-visited: #d2232a; */
+	--color-link-active: #83a3b3;
 	--color-quote-border: #000;
 	--color-quote-citation: #6c7781;
 

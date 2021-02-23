@@ -59,7 +59,6 @@ blockquote {
 }
 
 @media (--content-query) {
-
 	.entry-content > blockquote {
 		margin-left: auto;
 	}
@@ -112,4 +111,19 @@ ins {
 
 big {
 	font-size: 125%;
+}
+
+h2 {
+	font-size: 16pt;
+	line-height: 20pt;
+	color: black;
+}
+
+.post-thumbnail img {
+	height: 109px;
+	width: auto;
+}
+
+.category-links {
+	color: #d2232a;
 }

@@ -24,7 +24,7 @@ $taxonomies = wp_list_filter(
 
 	foreach ( $taxonomies as $category) {
 
-		$separator = _x( ', ', 'list item separator', 'wp-rig' );
+		$separator = _x( ', ', 'list item separator', 'wp-rig');
 
 		switch ( $category->name ) {
 			case 'category':
