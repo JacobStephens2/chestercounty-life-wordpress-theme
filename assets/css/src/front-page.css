@@ -26,6 +26,11 @@
 	align-items: center;
 }
 
+.post-thumbnail img {
+	height: 109px;
+	width: auto;
+}
+
 .wp-post-image {
 	width: 100%;
 	height: auto;

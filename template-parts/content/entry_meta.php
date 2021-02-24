@@ -73,10 +73,10 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		<span class="posted-by">
 			<?php
 			/* translators: %s: post author */
-			$author_byline = _x( 'By %s', 'post author', 'wp-rig' );
+			$author_byline = _x( '&nbsp;|&nbsp;%s', 'post author', 'wp-rig' );
 			if ( ! empty( $time_string ) ) {
 				/* translators: %s: post author */
-				$author_byline = _x( 'by %s', 'post author', 'wp-rig' );
+				$author_byline = _x( '&nbsp;|&nbsp; %s', 'post author', 'wp-rig' );
 			}
 			printf(
 				esc_html( $author_byline ),

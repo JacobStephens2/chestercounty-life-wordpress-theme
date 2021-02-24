@@ -1,0 +1,65 @@
+/* Custom styles for home. */
+
+.entry-header {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 1fr 2fr 2fr;
+	grid-template-areas:
+		"photo category"
+		"photo title"
+		"photo excerpt";
+	column-gap: 0.5rem;
+}
+
+.post-thumbnail {
+	grid-area: photo;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: auto;
+}
+
+.entry-footer {
+	grid-area: category;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: flex-end;
+}
+
+.entry-title {
+	grid-area: title;
+	margin: 0;
+	display: flex;
+	align-items: center;
+}
+
+.entry-content {
+	grid-area: excerpt;
+	margin: 0;
+	display: flex;
+	align-items: flex-start;
+}
+
+p {
+	margin: 0;
+}
+
+.comments-area,
+.entry-content > *,
+.entry-footer,
+.entry-header,
+.entry-summary > *,
+.page-content > *,
+.page-header,
+.page-navigation,
+.post-navigation,
+.site-info {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.site-main {
+	margin: 0 5%;
+}

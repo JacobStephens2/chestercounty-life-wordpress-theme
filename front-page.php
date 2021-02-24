@@ -25,8 +25,6 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 
 		if ( have_posts() ) {
 
-		//	get_template_part( 'template-parts/content/page_header' );
-
 			while ( have_posts() ) {
 				the_post();
 				get_template_part( 'template-parts/content/entry_front_page', get_post_type() );
