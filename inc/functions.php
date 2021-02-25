@@ -24,3 +24,4 @@ function wp_rig() : Template_Tags {
 
 	return $theme->template_tags();
 }
+
