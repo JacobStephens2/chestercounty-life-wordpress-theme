@@ -1,0 +1,41 @@
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+
+.ken {
+	max-width: 50%;
+	height: auto;
+}
+
+p {
+	line-height: 26px;
+	font-weight: 300;
+}
+
+.entry-content > li {
+	font-weight: 400;
+}
+
+.about-link {
+	color: var(--color-theme-red);
+}
+
+strong {
+	font-weight: 700;
+}
+
+.footer-paragraph-p {
+	line-height: var(--global-font-line-height);
+}
+
+.wp-block-columns {
+	padding: 10px;
+}
+
+.regular {
+	font-weight: 400;
+}
+
+.site-info {
+	font-weight: 400;
+}

@@ -28,13 +28,13 @@ $taxonomies = wp_list_filter(
 				$class            = 'category-links term-links';
 				$list             = get_the_category_list( esc_html( $separator ), '', $post->ID );
 				/* translators: %s: list of taxonomy terms */
-				$placeholder_text = __( 'Posted in %s', 'wp-rig' );
+				$placeholder_text = __( '%s', 'wp-rig' );
 				break;
 			case 'post_tag':
 				$class            = 'tag-links term-links';
 				$list             = get_the_tag_list( '', esc_html( $separator ), '', $post->ID );
 				/* translators: %s: list of taxonomy terms */
-				$placeholder_text = __( 'Tagged %s', 'wp-rig' );
+				$placeholder_text = __( '%s', 'wp-rig' );
 				break;
 			default:
 				$class            = str_replace( '_', '-', $taxonomy->name ) . '-links term-links';

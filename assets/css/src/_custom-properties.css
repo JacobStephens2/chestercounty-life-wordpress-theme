@@ -7,6 +7,7 @@
 
 :root {
 	--content-width: 55rem;
+	--narrow-content-width: 40rem;
 	--dropdown-symbol-width: 0.7em;
 
 	/* Typography */
@@ -26,6 +27,7 @@
 	--global-font-color: #333;
 	--border-color-dark: #333;
 	--border-color-light: #ccc;
+
 	/* --color-link: #d2232a;
 	--color-link-visited: #d2232a; */
 	--color-link-active: #83a3b3;
@@ -33,13 +35,15 @@
 	--color-quote-citation: #6c7781;
 
 	/* Custom editor colors */
-	--color-theme-primary: #e36d60;
-	--color-theme-secondary: #41848f;
+	--color-theme-primary: #a8d1e4;
+	--color-theme-secondary: #90b4c5;
 	--color-theme-red: #c0392b;
+	--color-theme-bright-red: #d2232a;
 	--color-theme-green: #27ae60;
 	--color-theme-blue: #2980b9;
 	--color-theme-yellow: #f1c40f;
 	--color-theme-black: #1c2833;
+	--color-theme-dark-black: #000;
 	--color-theme-grey: #95a5a6;
 	--color-theme-white: #ecf0f1;
 	--color-custom-daylight: #97c0b7;

@@ -15,6 +15,7 @@
 # Content navigation
 # Footer
 # Infinite scroll
+# Buttons
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -218,6 +219,7 @@ select {
 	padding: 60px 0 1.75em 0;
 	margin-left: 5%;
 	display: flex;
+	justify-content: center;
 }
 
 .site-title {
@@ -397,11 +399,13 @@ select {
 .main-navigation a:hover,
 .main-navigation a:focus {
 	text-decoration: underline;
+	text-decoration-thickness: 5px;
+	text-decoration-color: var(--color-theme-primary);
 }
 
 .main-navigation .current-menu-item > a,
 .main-navigation .current-menu-ancestor > a {
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .main-navigation ul {
@@ -413,6 +417,12 @@ select {
 
 .main-navigation ul ul li {
 	padding-left: 1em;
+}
+
+.current_page_item {
+	text-decoration: underline;
+	text-decoration-color: var(--color-theme-primary);
+	text-decoration-thickness: 5px;
 }
 
 @media (--wide-menu-query) {
@@ -454,6 +464,7 @@ select {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		font-weight: 600;
 	}
 }
 
@@ -573,7 +584,24 @@ select {
 }
 
 .site-info {
-	text-align: center;
+	text-align: left;
+	font-size: var(--font-size-small);
+}
+
+.footer-paragraph-p {
+	margin-top: 0.3rem;
+	margin-bottom: 0;
+}
+
+.privacy-policy-link {
+	color: var(--color-theme-red);
+}
+
+.privacy-policy-link:visited {
+	color: var(--color-theme-red);
+}
+.privacy-policy-link:hover {
+	color: var(--color-link-active);
 }
 
 /*--------------------------------------------------------------
@@ -592,4 +620,17 @@ select {
 were hidden (via .neverending) before. */
 .infinity-end.neverending .site-footer {
 	display: block;
+}
+
+/*--------------------------------------------------------------
+# Buttons
+--------------------------------------------------------------*/
+
+.wp-block-button:hover {
+	background-color: var(--color-theme-primary);
+}
+
+.is-style-outline:hover > .wp-block-button__link:hover,
+.wp-block-button__link.is-style-outline:hover {
+	border: 2px solid transparent;
 }

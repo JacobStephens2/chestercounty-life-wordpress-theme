@@ -318,6 +318,18 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					return is_home();
 				},
 			),
+			'wp-rig-past-issues'   => array(
+				'file'             => 'past-issues.min.css',
+			),
+			'wp-rig-subscribe'   => array(
+				'file'             => 'subscribe.min.css',
+			),
+			'wp-rig-about'   => array(
+				'file'             => 'about.min.css',
+			),
+			'wp-rig-category'   => array(
+				'file'             => 'category.min.css',
+			),
 		);
 
 		/**

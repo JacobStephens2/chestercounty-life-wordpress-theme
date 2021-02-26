@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying category archives.
+ * The template for displaying author archives.
  *
  * When active, applies to all category archives.
  * To target a specific category, rename file to category-{slug/id}.php

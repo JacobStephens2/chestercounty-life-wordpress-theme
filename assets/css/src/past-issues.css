@@ -1,0 +1,34 @@
+/**
+ * Styling for past issues.
+ **/
+
+.dflip-books {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+._df_thumb {
+	height: 370px;
+	width: auto;
+}
+
+h1 {
+	margin-bottom: 0;
+	margin-top: 1em;
+}
+
+h1::before {
+	content: "";
+	border-top: none;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
+	top: 10px;
+}
+
+h1::after {
+	content: "";
+	border-top: none;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
+	top: 10px;
+	margin-left: 1rem;
+	padding-right: 86%;
+}

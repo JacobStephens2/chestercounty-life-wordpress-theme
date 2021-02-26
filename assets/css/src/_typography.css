@@ -14,6 +14,7 @@ textarea {
 	font-family: var(--global-font-family);
 	font-size: var(--font-size-regular);
 	line-height: var(--global-font-line-height);
+	text-underline-offset: 8px;
 }
 /* stylelint-enable */
 
@@ -26,13 +27,14 @@ h6 {
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
 	clear: both;
+	font-weight: 700;
 }
 
 .entry-title-singular,
 .page-title {
 	font-size: 2.5rem;
 	line-height: 1.4;
-	margin-top: 1em;
+	margin-top: 0;
 	margin-bottom: 1em;
 }
 
@@ -115,10 +117,15 @@ big {
 
 h2 {
 	font-size: 16pt;
-	line-height: 20pt;
-	color: black;
+	line-height: 25px;
+	color: var(--color-theme-dark-black);
+	font-weight: 600;
 }
 
 .category-links {
-	color: #d2232a;
+	color: var(--color-theme-bright-red);
+}
+
+.entry-title-singular {
+	margin-bottom: 0;
 }

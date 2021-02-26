@@ -40,7 +40,7 @@
 }
 
 .entry-meta {
-	margin: 1em 0;
+	margin: 1em 0 0;
 }
 
 /* Hides the update date and time. */
@@ -55,7 +55,7 @@
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	margin: 1em 0 0;
 }
 
 .entry-content > ul,
@@ -80,8 +80,8 @@
 .post-navigation,
 .page-navigation,
 .comments-area {
-	margin-top: 1.5em;
-	margin-bottom: 1.5em;
+	margin-top: 0;
+	margin-bottom: 1em;
 }
 
 .page-content > *,

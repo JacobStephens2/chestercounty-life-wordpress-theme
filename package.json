@@ -101,7 +101,14 @@
     ]
   },
   "stylelint": {
-    "extends": "stylelint-config-wordpress"
+    "extends": "stylelint-config-wordpress",
+    "rules": {
+      "declaration-colon-newline-after": null,
+      "value-list-comma-newline-after": null,
+      "selector-class-pattern": null,
+      "rule-empty-line-before": null,
+      "comment-empty-line-before": null
+    }
   },
   "scripts": {
     "build": "gulp buildDev",

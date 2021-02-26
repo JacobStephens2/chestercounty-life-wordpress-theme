@@ -64,3 +64,58 @@
 h2 {
 	margin-top: 0;
 }
+
+.post-2 > .entry-footer > .entry-taxonomies > .category-links {
+	display: none;
+}
+
+#click {
+	position: absolute;
+	z-index: 1;
+	background-color: var(--color-theme-primary);
+	width: 120px;
+	height: 120px;
+	border-radius: 500px;
+	text-align: center;
+	margin-top: 10px;
+	left: 7.5rem;
+	font-weight: 600;
+}
+
+#start {
+	font-size: var(--font-size-small);
+	margin-top: 17px;
+}
+
+#main {
+	line-height: 1.15;
+}
+
+.from-recent-issues {
+	margin-top: 2rem;
+}
+
+.title-line {
+	margin-top: 1rem;
+}
+
+.title-line:before {
+	content: "";
+	border-top: none;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
+	top: 10px;
+}
+
+.title-line:after {
+	content: "";
+	border-top: none;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
+	top: 10px;
+	margin-left: 1rem;
+	padding-right: 178px;
+}
+
+.recent-issue-list {
+	display: flex;
+	justify-content: center;
+}
