@@ -634,3 +634,25 @@ were hidden (via .neverending) before. */
 .wp-block-button__link.is-style-outline:hover {
 	border: 2px solid transparent;
 }
+
+/*--------------------------------------------------------------
+# ARMember
+--------------------------------------------------------------*/
+
+.arm_form_102 .arm_registration_link a,
+.arm_form_102 .arm_forgotpassword_link a {
+	color: var(--color-theme-secondary) !important;
+}
+
+.arm_form_102 .arm_form_field_submit_button.md-button,
+.arm_form_102 .arm_form_field_submit_button {
+	color: var(--color-theme-secondary) !important;
+}
+
+.arm_form_101
+	.arm_setup_submit_btn_wrapper
+	.arm_form_field_submit_button.md-button,
+.arm_form_101 .arm_setup_submit_btn_wrapper .arm_form_field_submit_button {
+	border: 2px solid #90b4c5;
+	color: #90b4c5;
+}

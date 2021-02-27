@@ -28,3 +28,7 @@ a:hover,
 a:active {
 	outline: 0;
 }
+
+.category-links {
+	font-weight: 600;
+}

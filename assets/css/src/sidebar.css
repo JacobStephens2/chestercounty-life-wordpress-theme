@@ -25,3 +25,15 @@
 		width: 18rem;
 	}
 }
+
+ul {
+	color: var(--color-theme-bright-red);
+}
+
+.widget-title {
+	margin-bottom: 9px;
+}
+
+.category-links {
+	font-weight: 600;
+}

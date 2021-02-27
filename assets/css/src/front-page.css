@@ -69,6 +69,10 @@ h2 {
 	display: none;
 }
 
+.category-links {
+	font-weight: 600;
+}
+
 #click {
 	position: absolute;
 	z-index: 1;
