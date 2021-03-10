@@ -656,3 +656,19 @@ were hidden (via .neverending) before. */
 	border: 2px solid #90b4c5;
 	color: #90b4c5;
 }
+
+/*--------------------------------------------------------------
+# Other
+--------------------------------------------------------------*/
+
+span.edit-link {
+	float: right;
+}
+
+.popup-header {
+	color: var(--color-theme-black);
+}
+
+.site-main {
+	margin-left: 7%;
+}

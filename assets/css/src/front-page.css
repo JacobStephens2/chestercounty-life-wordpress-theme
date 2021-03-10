@@ -8,6 +8,10 @@
 	margin-top: 0;
 }
 
+._df_book-cover {
+	background-size: cover;
+}
+
 .entry-header {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -27,7 +31,7 @@
 }
 
 .post-thumbnail img {
-	height: 109px;
+	height: auto;
 	width: auto;
 }
 
@@ -82,7 +86,7 @@ h2 {
 	border-radius: 500px;
 	text-align: center;
 	margin-top: 10px;
-	left: 7.5rem;
+	left: -3em;
 	font-weight: 600;
 }
 
@@ -116,10 +120,14 @@ h2 {
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
 	top: 10px;
 	margin-left: 1rem;
-	padding-right: 178px;
+	padding-right: 150px;
 }
 
 .recent-issue-list {
 	display: flex;
 	justify-content: center;
+}
+
+.edition-ancestor {
+	position: relative;
 }
