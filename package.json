@@ -107,6 +107,7 @@
       "value-list-comma-newline-after": null,
       "selector-class-pattern": null,
       "rule-empty-line-before": null,
+      "indentation": null,
       "comment-empty-line-before": null
     }
   },

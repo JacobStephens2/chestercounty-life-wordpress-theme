@@ -379,6 +379,7 @@ select {
 ## Main navigation menu
 --------------------------------------------------------------*/
 .main-navigation {
+	text-underline-offset: 2px;
 	display: flex;
 	align-items: center;
 	margin: 0;
@@ -671,4 +672,26 @@ span.edit-link {
 
 .site-main {
 	margin-left: 7%;
+}
+
+#right-column {
+	margin-left: 3em;
+}
+
+.arm_close_account_container.arm_account_detail_block {
+	display: flex;
+	justify-content: center;
+}
+
+footer#colophon {
+	justify-content: center;
+	display: flex;
+}
+
+.over_header_image_text {
+	color: var(--color-theme-white);
+	margin-left: 7%;
+	width: var(--content-width);
+	left: 0;
+	font-size: var(--font-size-large);
 }

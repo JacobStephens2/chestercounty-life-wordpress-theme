@@ -8,6 +8,10 @@
 	margin-top: 0;
 }
 
+.dflip-books {
+	margin-top: 1.2rem;
+}
+
 ._df_book-cover {
 	background-size: cover;
 }
@@ -48,13 +52,10 @@
 
 .entry-footer {
 	grid-area: category;
-	height: 0px;
+	height: 0;
 	padding: 0;
 	margin: 0;
-}
-
-.entry-footer {
-	border-bottom: 0px;
+	border-bottom: 0;
 }
 
 .entry-taxonomies {
@@ -69,12 +70,12 @@ h2 {
 	margin-top: 0;
 }
 
-.post-2 > .entry-footer > .entry-taxonomies > .category-links {
-	display: none;
-}
-
 .category-links {
 	font-weight: 600;
+}
+
+.post-2 > .entry-footer > .entry-taxonomies > .category-links {
+	display: none;
 }
 
 #click {
@@ -107,14 +108,14 @@ h2 {
 	margin-top: 1rem;
 }
 
-.title-line:before {
+.title-line::before {
 	content: "";
 	border-top: none;
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
 	top: 10px;
 }
 
-.title-line:after {
+.title-line::after {
 	content: "";
 	border-top: none;
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
@@ -130,4 +131,10 @@ h2 {
 
 .edition-ancestor {
 	position: relative;
+}
+
+@media (min-width: 782px) {
+	.wp-block-column:not(:first-child) {
+		margin-left: 3em;
+	}
 }

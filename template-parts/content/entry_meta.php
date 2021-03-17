@@ -56,15 +56,7 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 	<?php
 	if ( ! empty( $time_string ) ) {
 		?>
-		<span class="posted-on">
-			<?php
-			printf(
-				/* translators: %s: post date */
-				esc_html_x( 'Published on %s', 'post date', 'wp-rig' ),
-				$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			);
-			?>
-		</span>
+
 		<?php
 	}
 
@@ -73,10 +65,10 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		<span class="posted-by">
 			<?php
 			/* translators: %s: post author */
-			$author_byline = _x( '&nbsp;|&nbsp;%s', 'post author', 'wp-rig' );
+			$author_byline = _x( '%s', 'post author', 'wp-rig' );
 			if ( ! empty( $time_string ) ) {
 				/* translators: %s: post author */
-				$author_byline = _x( '&nbsp;|&nbsp; %s', 'post author', 'wp-rig' );
+				$author_byline = _x( '%s', 'post author', 'wp-rig' );
 			}
 			printf(
 				esc_html( $author_byline ),

@@ -25,20 +25,31 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-home' );
 
 	<?php
 
-if ( have_posts() ) {
+		// query
+		$the_query = new WP_Query(array(
+			'post_type'			=> 'post',
+			'posts_per_page'	=> 10,
+			'meta_key'			=> 'post_display_order',
+			'orderby'			=> 'meta_value',
+			'order'				=> 'DESC'
+		));
 
-	while ( have_posts() ) {
-		the_post();
-		get_template_part( 'template-parts/content/entry_home', get_post_type() );
-	}
+		if( $the_query->have_posts() ) {
 
-	if ( ! is_singular() ) {
-		get_template_part( 'template-parts/content/pagination' );
-	}
-} else {
-	get_template_part( 'template-parts/content/error' );
-}
-?>
+			while( $the_query->have_posts() ) {
+				$the_query->the_post();
+				get_template_part( 'template-parts/content/entry_home', get_post_type() );
+			}
+
+			if ( ! is_singular() ) {
+				get_template_part( 'template-parts/content/pagination' );
+			}
+		} else {
+			get_template_part( 'template-parts/content/error' );
+		}
+
+	?>
+
 	</main><!-- #primary -->
 <?php
 get_sidebar();

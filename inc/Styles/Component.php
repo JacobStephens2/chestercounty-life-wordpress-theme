@@ -279,55 +279,55 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		$css_files = array(
-			'wp-rig-global'     => array(
+			'wp-rig-global' => array(
 				'file'   => 'global.min.css',
 				'global' => true,
 			),
-			'wp-rig-comments'   => array(
+			'wp-rig-comments' => array(
 				'file'             => 'comments.min.css',
 				'preload_callback' => function() {
 					return ! post_password_required() && is_singular() && ( comments_open() || get_comments_number() );
 				},
 			),
-			'wp-rig-content'    => array(
+			'wp-rig-content' => array(
 				'file'             => 'content.min.css',
 				'preload_callback' => '__return_true',
 			),
-			'wp-rig-sidebar'    => array(
+			'wp-rig-sidebar' => array(
 				'file'             => 'sidebar.min.css',
 				'preload_callback' => function() {
 					return wp_rig()->is_primary_sidebar_active();
 				},
 			),
-			'wp-rig-widgets'    => array(
+			'wp-rig-widgets' => array(
 				'file'             => 'widgets.min.css',
 				'preload_callback' => function() {
 					return wp_rig()->is_primary_sidebar_active();
 				},
 			),
 			'wp-rig-front-page' => array(
-				'file' => 'front-page.min.css',
+				'file'             => 'front-page.min.css',
 				'preload_callback' => function() {
 					global $template;
 					return 'front-page.php' === basename( $template );
 				},
 			),
-			'wp-rig-home'   => array(
+			'wp-rig-home' => array(
 				'file'             => 'home.min.css',
 				'preload_callback' => function() {
 					return is_home();
 				},
 			),
-			'wp-rig-past-issues'   => array(
+			'wp-rig-past-issues' => array(
 				'file'             => 'past-issues.min.css',
 			),
 			'wp-rig-subscribe'   => array(
 				'file'             => 'subscribe.min.css',
 			),
-			'wp-rig-about'   => array(
+			'wp-rig-about' => array(
 				'file'             => 'about.min.css',
 			),
-			'wp-rig-category'   => array(
+			'wp-rig-category' => array(
 				'file'             => 'category.min.css',
 			),
 		);
