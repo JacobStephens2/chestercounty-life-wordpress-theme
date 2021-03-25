@@ -21,7 +21,7 @@ get_header();
 wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-home', 'wp-rig-featured-articles');
 
 ?>
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main left_column">
 
 	<h2 class="title-line">FEATURED ARTICLES</h2>
 

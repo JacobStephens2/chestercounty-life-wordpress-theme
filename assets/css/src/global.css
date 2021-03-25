@@ -379,7 +379,7 @@ select {
 ## Main navigation menu
 --------------------------------------------------------------*/
 .main-navigation {
-	text-underline-offset: 2px;
+	text-underline-offset: 4px;
 	display: flex;
 	align-items: center;
 	margin: 0;
@@ -708,19 +708,20 @@ footer#colophon {
 }
 
 .title-line {
-	margin-top: 1rem;
 	white-space: nowrap;
 	width: 100%;
 	overflow: hidden;
+	margin-bottom: 0.7rem;
 }
 
 .title-line::after {
 	content: "";
 	border-top: none;
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
-	top: -1px;
 	margin-left: 1rem;
 	padding-right: 100%;
+	top: -1px;
+	position: relative;
 }
 
 .right_column {
@@ -757,4 +758,21 @@ footer#colophon {
 
 .author {
 	font-size: large;
+}
+
+.margin-top {
+	margin-top: 0.7rem;
+	margin-bottom: 0.7rem;
+}
+
+span.edit-link {
+	float: right;
+}
+
+.popup-header {
+	color: var(--color-theme-black);
+}
+
+.no-top-margin {
+	margin-top: 0;
 }

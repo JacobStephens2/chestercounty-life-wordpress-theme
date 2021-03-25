@@ -1,3 +1,7 @@
 span.tag-links.term-links {
 	display: none;
 }
+
+.entry-title.entry-title-singular {
+	margin-top: 0.7rem;
+}

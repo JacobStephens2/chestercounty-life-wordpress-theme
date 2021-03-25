@@ -31,26 +31,6 @@
 	width: auto;
 }
 
-h1 {
-	margin-bottom: 0;
-	margin-top: 1rem;
-	white-space: nowrap;
-	width: 100%;
-	overflow: hidden;
-}
-
-h1::before {
-	content: "";
-	border-top: none;
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
-	top: 10px;
-}
-
-h1::after {
-	content: "";
-	border-top: none;
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
-	top: -1px;
-	margin-left: 1rem;
-	padding-right: 100%;
+.title-line::after {
+	top: -10px;
 }

@@ -120,9 +120,10 @@ big {
 
 h2 {
 	font-size: 20pt;
-	line-height: 25px;
+	line-height: 1.2;
 	color: var(--color-theme-dark-black);
 	font-weight: 600;
+	margin: 0.25rem auto 0.25rem auto;
 }
 
 .category-links {
