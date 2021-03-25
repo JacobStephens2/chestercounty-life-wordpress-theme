@@ -18,10 +18,12 @@ use WP_Query;
 
 get_header();
 
-wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-home' );
+wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-home', 'wp-rig-featured-articles');
 
 ?>
 	<main id="primary" class="site-main">
+
+	<h2 class="title-line">FEATURED ARTICLES</h2>
 
 	<?php
 

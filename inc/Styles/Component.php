@@ -321,7 +321,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			'wp-rig-past-issues' => array(
 				'file'             => 'past-issues.min.css',
 			),
-			'wp-rig-subscribe'   => array(
+			'wp-rig-subscribe' => array(
 				'file'             => 'subscribe.min.css',
 			),
 			'wp-rig-about' => array(
@@ -329,6 +329,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			),
 			'wp-rig-category' => array(
 				'file'             => 'category.min.css',
+			),
+			'wp-rig-featured-articles' => array(
+				'file'             => 'featured-articles.min.css',
+			),
+			'wp-rig-single' => array(
+				'file'             => 'single.min.css',
 			),
 		);
 

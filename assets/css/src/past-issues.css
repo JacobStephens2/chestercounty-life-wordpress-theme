@@ -33,7 +33,10 @@
 
 h1 {
 	margin-bottom: 0;
-	margin-top: 1em;
+	margin-top: 1rem;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
 }
 
 h1::before {
@@ -47,7 +50,7 @@ h1::after {
 	content: "";
 	border-top: none;
 	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
-	top: 10px;
+	top: -1px;
 	margin-left: 1rem;
-	padding-right: 86%;
+	padding-right: 100%;
 }

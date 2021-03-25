@@ -62,3 +62,9 @@ p {
 	margin: 0 5% 0 22%;
 	width: var(--narrow-content-width);
 }
+
+@media (max-width: 1150px) {
+	#secondary {
+		display: none;
+	}
+}

@@ -695,3 +695,66 @@ footer#colophon {
 	left: 0;
 	font-size: var(--font-size-large);
 }
+
+.post-thumbnail {
+	grid-area: photo;
+	display: flex;
+	align-items: flex-start;
+}
+
+.wp-block-column .entry-header {
+	border-bottom: 1px solid #95a5a6;
+	padding-bottom: 1rem;
+}
+
+.title-line {
+	margin-top: 1rem;
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+}
+
+.title-line::after {
+	content: "";
+	border-top: none;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
+	top: -1px;
+	margin-left: 1rem;
+	padding-right: 100%;
+}
+
+.right_column {
+	margin-right: 1rem;
+}
+
+.left_column {
+	border-right: 1px solid #95a5a6;
+	padding-right: 2rem;
+}
+
+@media (min-width: 1100px) {
+	.right_column {
+		margin-right: 3rem;
+	}
+	.left_column {
+		margin-left: 2rem;
+	}
+}
+
+@media (min-width: 782px) {
+	.wp-block-column:not(:first-child) {
+		margin-left: 1.5em;
+	}
+}
+
+.first_column {
+	margin: 0 1rem 0 1rem;
+}
+
+.lower {
+	margin-bottom: 0;
+}
+
+.author {
+	font-size: large;
+}

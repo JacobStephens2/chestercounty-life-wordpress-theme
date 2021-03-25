@@ -1,8 +1,9 @@
 {
   "theme": {
-    "slug": "ccl12",
+    "slug": "ccl_1_5",
     "name": "Chester County Life",
-    "author": "Goodness Creative"
+    "author": "Goodness Creative",
+    "PHPNamespace": "CCL\\CCL"
   },
   "dev": {
     "browserSync": {

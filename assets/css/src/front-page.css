@@ -28,12 +28,6 @@
 	margin: 0;
 }
 
-.post-thumbnail {
-	grid-area: photo;
-	display: flex;
-	align-items: center;
-}
-
 .post-thumbnail img {
 	height: auto;
 	width: auto;
@@ -91,6 +85,12 @@ h2 {
 	font-weight: 600;
 }
 
+#click:hover {
+	filter: drop-shadow(5px 5px 5px #333);
+	transition: 0.2s;
+	color: black;
+}
+
 #start {
 	font-size: var(--font-size-small);
 	margin-top: 17px;
@@ -104,26 +104,6 @@ h2 {
 	margin-top: 2rem;
 }
 
-.title-line {
-	margin-top: 1rem;
-}
-
-.title-line::before {
-	content: "";
-	border-top: none;
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
-	top: 10px;
-}
-
-.title-line::after {
-	content: "";
-	border-top: none;
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHUlEQVQYV2NkwAIYGRgY/jMwMIBoOEDhwESJFwQAUaABBqhlwJ0AAAAASUVORK5CYII=);
-	top: 10px;
-	margin-left: 1rem;
-	padding-right: 150px;
-}
-
 .recent-issue-list {
 	display: flex;
 	justify-content: center;
@@ -133,8 +113,19 @@ h2 {
 	position: relative;
 }
 
-@media (min-width: 782px) {
-	.wp-block-column:not(:first-child) {
-		margin-left: 3em;
+@media (max-width: 1100px) {
+	._df_thumb {
+		height: 550px;
 	}
+}
+
+@media (max-width: 1300px) and (min-width: 1101px) {
+	._df_thumb {
+		height: 650px;
+	}
+}
+
+.front_cover:hover {
+	filter: drop-shadow(5px 5px 5px #333);
+	transition: 0.2s;
 }
