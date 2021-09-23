@@ -133,3 +133,10 @@ h2 {
 #colophon {
 	width: 100%;
 }
+
+@media (max-width: 599px) {
+	#click {
+		margin-top: 30px;
+		left: -2em;
+	}
+}
