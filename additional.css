@@ -35,3 +35,25 @@ article#post-2 {
 #post-2 .wp-block-column .entry-header {
     height: 230px !important;
 }
+#post-2 .wp-block-column .entry-header {
+    height: fit-content !important;
+}
+
+.entry-header {
+    display: grid;
+    grid-template-columns: 4fr 5fr !important;
+    grid-template-rows: 1fr !important;
+    grid-template-areas: "photo category" !important;
+    grid-row-gap: .5rem;
+    row-gap: .5rem;
+    grid-column-gap: 3rem;
+    -webkit-column-gap: 3rem;
+    -moz-column-gap: 3rem;
+    column-gap: 3rem;
+    margin: 0;
+}
+
+.entry-footer span.category-links {
+    margin-right: 1em;
+    white-space: nowrap;
+}
