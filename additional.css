@@ -39,7 +39,7 @@ article#post-2 {
     height: fit-content !important;
 }
 
-.entry-header {
+#post-2 .entry-header {
     display: grid;
     grid-template-columns: 4fr 5fr !important;
     grid-template-rows: 1fr !important;
