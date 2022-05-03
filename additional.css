@@ -1,0 +1,37 @@
+article#post-2 {
+	margin-top: 1rem;
+}
+.entry-title {
+    grid-area: category !important;
+    margin: 1.5rem 0 1rem !important;
+}
+
+.featured-articles .entry-title {
+  margin-top: 0.2rem !important;
+}
+
+.popup-header a {
+	color: white;
+}
+
+.pum-container .pum-title {
+    margin-bottom: 0.1em;
+}
+
+.pum-content.popmake-content:focus {
+    outline: white;
+}
+@media (min-width: 600px) and (max-width: 1083px) {
+.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column:not(:only-child) {
+    flex-basis: 100%!important;
+  }
+}
+@media (min-width: 781px) and (max-width: 1083px) {
+  .wp-block-columns {
+    flex-wrap: wrap;
+  }
+}
+
+#post-2 .wp-block-column .entry-header {
+    height: 230px !important;
+}
