@@ -18,6 +18,11 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-category' );
 
 ?>
 	<main id="primary" class="site-main">
+		<style>
+		header .post-thumbnail img {
+    		max-height: 100% !important;
+		}
+		</style>
 		<?php
 		if ( have_posts() ) {
 
