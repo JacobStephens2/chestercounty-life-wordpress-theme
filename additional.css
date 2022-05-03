@@ -57,3 +57,6 @@ article#post-2 {
     margin-right: 1em;
     white-space: nowrap;
 }
+div.ccl-content h2.entry-title {
+    margin-top: 0 !important;
+}
