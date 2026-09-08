@@ -28,6 +28,8 @@
 !.babelrc
 !composer.json
 !composer.lock
+!AGENTS.md
+!/docs/
 !CHANGELOG.md
 !CONTRIBUTING.md
 !.editorconfig
@@ -46,3 +48,4 @@
 !screenshot.png
 !.travis.yml
 !.browserslistrc
+.scratch
