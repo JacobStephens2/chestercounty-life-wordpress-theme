@@ -9,8 +9,11 @@ namespace WP_Rig\WP_Rig\Post_Thumbnails;
 
 use WP_Rig\WP_Rig\Component_Interface;
 use function add_action;
+use function add_filter;
 use function add_theme_support;
 use function add_image_size;
+use function is_front_page;
+use function is_home;
 
 /**
  * Class for managing post thumbnail support.
@@ -34,6 +37,7 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'after_setup_theme', array( $this, 'action_add_post_thumbnail_support' ) );
 		add_action( 'after_setup_theme', array( $this, 'action_add_image_sizes' ) );
+		add_filter( 'post_thumbnail_size', array( $this, 'filter_post_thumbnail_size' ), 10, 2 );
 	}
 
 	/**
@@ -48,5 +52,20 @@ class Component implements Component_Interface {
 	 */
 	public function action_add_image_sizes() {
 		add_image_size( 'wp-rig-featured', 720, 480, true );
+	}
+
+	/**
+	 * Filters the post thumbnail size to request a responsive size on the homepage/sidebars.
+	 *
+	 * @param string|array $size    Image size requested.
+	 * @param int          $post_id Post ID.
+	 * @return string|array Filtered image size.
+	 */
+	public function filter_post_thumbnail_size( $size, $post_id ) {
+		if ( ( is_front_page() || is_home() ) && 'post-thumbnail' === $size ) {
+			return 'medium_large';
+		}
+
+		return $size;
 	}
 }
