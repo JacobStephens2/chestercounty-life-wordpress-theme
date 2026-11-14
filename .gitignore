@@ -44,6 +44,7 @@
 !phpunit.integration.xml.dist
 !phpunit.xml.dist
 !README.md
+!GLOSSARY.md
 !readme.txt
 !screenshot.png
 !.travis.yml

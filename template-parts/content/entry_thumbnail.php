@@ -32,31 +32,28 @@ if ( is_singular( get_post_type() ) ) {
 	<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
 		<?php
 		global $wp_query;
-		$thumbnail_size = ( is_front_page() || is_home() ) ? 'medium_large' : 'post-thumbnail';
-		if ( 0 === $wp_query->current_post ) {
-			the_post_thumbnail(
-				$thumbnail_size,
+		$thumbnail_size = 'post-thumbnail';
+		$thumbnail_attr = array(
+			'alt'   => the_title_attribute(
 				array(
-					'class' => 'skip-lazy',
-					'alt'   => the_title_attribute(
-						array(
-							'echo' => false,
-						)
-					),
+					'echo' => false,
 				)
-			);
-		} else {
-			the_post_thumbnail(
-				$thumbnail_size,
-				array(
-					'alt' => the_title_attribute(
-						array(
-							'echo' => false,
-						)
-					),
-				)
-			);
+			),
+			'sizes' => '100vw',
+		);
+
+		if ( is_front_page() || is_home() ) {
+			$thumbnail_size          = 'medium_large';
+			$thumbnail_attr['sizes'] = '(max-width: 768px) 90vw, 360px';
+		} elseif ( wp_rig()->is_primary_sidebar_active() ) {
+			$thumbnail_attr['sizes'] = '(min-width: 960px) 75vw, 100vw';
 		}
+
+		if ( 0 === $wp_query->current_post ) {
+			$thumbnail_attr['class'] = 'skip-lazy';
+		}
+
+		the_post_thumbnail( $thumbnail_size, $thumbnail_attr );
 		?>
 	</a><!-- .post-thumbnail -->
 	<?php
