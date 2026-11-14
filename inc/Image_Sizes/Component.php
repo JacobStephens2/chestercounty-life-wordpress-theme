@@ -9,7 +9,6 @@ namespace WP_Rig\WP_Rig\Image_Sizes;
 
 use WP_Rig\WP_Rig\Component_Interface;
 use function WP_Rig\WP_Rig\wp_rig;
-use WP_Post;
 use function add_filter;
 use function is_front_page;
 use function is_home;
@@ -46,7 +45,6 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_filter( 'wp_calculate_image_sizes', array( $this, 'filter_content_image_sizes_attr' ), 10, 2 );
 		add_filter( 'get_header_image_tag', array( $this, 'filter_header_image_tag' ), 10, 3 );
-		add_filter( 'wp_get_attachment_image_attributes', array( $this, 'filter_post_thumbnail_sizes_attr' ), 10, 3 );
 		add_filter( 'render_block', array( $this, 'filter_render_block_image' ), 10, 2 );
 	}
 
@@ -95,29 +93,6 @@ class Component implements Component_Interface {
 		}
 
 		return $html;
-	}
-
-	/**
-	 * Adds custom image sizes attribute to enhance responsive image functionality for post thumbnails.
-	 *
-	 * @param array        $attr       Attributes for the image markup.
-	 * @param WP_Post      $attachment Attachment post object.
-	 * @param string|array $size       Registered image size or flat array of height and width dimensions.
-	 * @return array The filtered attributes for the image markup.
-	 */
-	public function filter_post_thumbnail_sizes_attr( array $attr, WP_Post $attachment, $size ) : array {
-		if ( is_front_page() || is_home() ) {
-			$attr['sizes'] = '(max-width: 768px) 90vw, 360px';
-			return $attr;
-		}
-
-		$attr['sizes'] = '100vw';
-
-		if ( wp_rig()->is_primary_sidebar_active() ) {
-			$attr['sizes'] = '(min-width: 960px) 75vw, 100vw';
-		}
-
-		return $attr;
 	}
 
 	/**
