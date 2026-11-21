@@ -14,6 +14,7 @@ use function is_front_page;
 use function is_home;
 use function get_bloginfo;
 use function esc_attr;
+use function wp_parse_url;
 use function __;
 use function sprintf;
 use function str_replace;
@@ -29,6 +30,11 @@ use function ucwords;
  * Class for managing responsive image sizes.
  */
 class Component implements Component_Interface {
+
+	/**
+	 * Default source size for homepage content images and the magazine cover.
+	 */
+	const HOMEPAGE_IMAGE_SIZES = '(max-width: 768px) 90vw, 650px';
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -58,7 +64,7 @@ class Component implements Component_Interface {
 	 */
 	public function filter_content_image_sizes_attr( string $sizes, array $size ) : string {
 		if ( is_front_page() || is_home() ) {
-			return '(max-width: 768px) 90vw, 650px';
+			return self::HOMEPAGE_IMAGE_SIZES;
 		}
 
 		$width = $size[0];
@@ -103,46 +109,158 @@ class Component implements Component_Interface {
 	 * @return string Filtered block content.
 	 */
 	public function filter_render_block_image( string $block_content, array $block ) : string {
-		if ( ! ( is_front_page() || is_home() ) ) {
+		if ( 'core/image' !== ( $block['blockName'] ?? null ) || ! ( is_front_page() || is_home() ) ) {
 			return $block_content;
 		}
 
-		if ( false === strpos( $block_content, 'front_cover' ) ) {
+		$cover = $this->locate_magazine_cover( $block_content );
+		if ( null === $cover ) {
 			return $block_content;
 		}
 
-		// Replace 100vw sizes with column-accurate responsive sizes for the magazine cover.
-		$block_content = str_replace( 'sizes="auto, 100vw"', 'sizes="(max-width: 768px) 90vw, 650px"', $block_content );
-		$block_content = str_replace( 'sizes="100vw"', 'sizes="(max-width: 768px) 90vw, 650px"', $block_content );
+		$attributes = $cover['attributes'];
+		$updates    = array();
+		$sizes      = $attributes['sizes']['value'] ?? '';
+		if ( '100vw' === $sizes || 'auto, 100vw' === $sizes ) {
+			$updates['sizes'] = self::HOMEPAGE_IMAGE_SIZES;
+		}
 
-		// Handle empty or missing alt text on the magazine cover image.
-		$has_empty_alt  = (bool) preg_match( '/alt=(["\'])\s*\1/', $block_content );
-		$has_alt_at_all = (bool) preg_match( '/\balt=["\']/', $block_content );
-
-		if ( $has_empty_alt || ! $has_alt_at_all ) {
-			$edition_name = $this->determine_cover_edition_name( $block_content );
-
-			if ( ! empty( $edition_name ) ) {
+		if ( preg_match( '/\A[\s\p{Z}]*\z/u', $attributes['alt']['value'] ?? '' ) ) {
+			$edition_name = $this->determine_cover_edition_name( $cover['href'], $attributes['src']['value'] ?? '' );
+			if ( '' !== $edition_name ) {
 				/* translators: %s: edition name */
 				$alt_text = sprintf( __( 'Chester County Life Magazine Cover - %s', 'wp-rig' ), $edition_name );
 			} else {
 				$alt_text = __( 'Chester County Life Current Edition Magazine Cover', 'wp-rig' );
 			}
 
-			$block_content = $this->set_image_alt_attribute( $block_content, $alt_text );
+			$updates['alt'] = esc_attr( $alt_text );
+		}
+
+		// Work back from the end of the image tag so the earlier offsets stay valid.
+		foreach ( array_reverse( $attributes, true ) as $name => $attribute ) {
+			if ( isset( $updates[ $name ] ) ) {
+				$quote         = $attribute['quote'];
+				$block_content = substr_replace(
+					$block_content,
+					$attribute['assignment'] . $quote . $updates[ $name ] . $quote,
+					$cover['offset'] + $attribute['offset'],
+					$attribute['length']
+				);
+			}
+		}
+
+		if ( isset( $updates['alt'] ) && ! isset( $attributes['alt'] ) ) {
+			$block_content = substr_replace( $block_content, ' alt="' . $updates['alt'] . '"', $cover['offset'], 0 );
 		}
 
 		return $block_content;
 	}
 
 	/**
-	 * Extracts edition name from cover image block markup.
+	 * Locates the single primary image in a saved Image block.
 	 *
-	 * @param string $content HTML content containing cover image or link.
+	 * @param string $markup Rendered Image block HTML.
+	 * @return array|null Attribute offsets and wrapping link, or null for other markup.
+	 */
+	private function locate_magazine_cover( string $markup ) {
+		$space      = '[ \t\r\n\f]';
+		$attribute  = '([^ \t\r\n\f\x00"\'<>/=]+)(?:[ \t\r\n\f]*=[ \t\r\n\f]*("[^"]*"|\'[^\']*\'|[^ \t\r\n\f\x00"\'\x60=<>]+))?';
+		$attributes = "(?:$space+$attribute)*+$space*+";
+
+		// Match the figure and its optional legacy container, direct link and caption.
+		// Caption tags are consumed whole so quoted tag lookalikes cannot end the caption.
+		$pattern = <<<REGEX
+~
+\A $space*
+(?: <div(?<container>$attributes)> $space* )?
+<figure(?<figure>$attributes)> $space*
+(?: <a(?<link>$attributes)> $space* )?
+<img(?<image>$attributes)/?>
+(?(link) $space* </a$space*> )
+$space*
+(?:
+	<figcaption$attributes>
+	(?: [^<]++ | <!-- (?s:.*?) --> | </?(?!(?:figure|figcaption)(?:$space|/|>))[a-z][a-z0-9:-]*$attributes/?> )*+
+	</figcaption$space*> $space*
+)?
+</figure$space*>
+(?(container) $space* </div$space*> )
+$space* \z
+~ix
+REGEX;
+		if ( ! preg_match( $pattern, $markup, $matches, PREG_OFFSET_CAPTURE ) ) {
+			return null;
+		}
+
+		$figure    = $this->read_cover_attributes( $matches['figure'][0], $attribute );
+		$container = $this->read_cover_attributes( $matches['container'][0], $attribute );
+		if ( null === $figure || null === $container ) {
+			return null;
+		}
+
+		$class_separator   = '/[ \t\r\n\f]+/';
+		$figure_classes    = preg_split( $class_separator, $figure['class']['value'] ?? '' );
+		$container_classes = preg_split( $class_separator, $container['class']['value'] ?? '' );
+		$marked_container  = in_array( 'wp-block-image', $container_classes, true )
+			&& in_array( 'front_cover', $container_classes, true );
+		if ( ! in_array( 'front_cover', $figure_classes, true ) && ! $marked_container ) {
+			return null;
+		}
+
+		$image = $this->read_cover_attributes( $matches['image'][0], $attribute );
+		$link  = $this->read_cover_attributes( $matches['link'][0], $attribute );
+		if ( null === $image || null === $link ) {
+			return null;
+		}
+
+		return array(
+			'offset'     => $matches['image'][1],
+			'attributes' => $image,
+			'href'       => $link['href']['value'] ?? '',
+		);
+	}
+
+	/**
+	 * Reads the attributes of one tag matched by the Image block shape.
+	 *
+	 * @param string $markup  The portion of the tag containing attributes.
+	 * @param string $pattern Pattern for a single attribute.
+	 * @return array|null Decoded values and positions, or null for duplicate attributes.
+	 */
+	private function read_cover_attributes( string $markup, string $pattern ) {
+		preg_match_all( '~' . $pattern . '~', $markup, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE );
+		$attributes = array();
+		foreach ( $matches as $match ) {
+			$name = strtolower( $match[1][0] );
+			if ( isset( $attributes[ $name ] ) ) {
+				return null;
+			}
+
+			$raw_value = $match[2][0] ?? '';
+			$quoted    = isset( $raw_value[0] ) && ( '"' === $raw_value[0] || "'" === $raw_value[0] );
+			$attributes[ $name ] = array(
+				'value'      => html_entity_decode( $quoted ? substr( $raw_value, 1, -1 ) : $raw_value, ENT_QUOTES | ENT_HTML5, 'UTF-8' ),
+				'offset'     => $match[2][1] ?? ( $match[1][1] + strlen( $match[1][0] ) ),
+				'length'     => strlen( $raw_value ),
+				'quote'      => $quoted ? $raw_value[0] : '"',
+				'assignment' => isset( $match[2] ) ? '' : '=',
+			);
+		}
+
+		return $attributes;
+	}
+
+	/**
+	 * Extracts an edition from the wrapping link or primary image filename.
+	 *
+	 * @param string $href Wrapping link URL.
+	 * @param string $src  Cover image URL.
 	 * @return string Extracted edition name, or empty string if not found.
 	 */
-	protected function determine_cover_edition_name( string $content ) : string {
-		if ( preg_match( '/#pdf-([a-zA-Z0-9-]+)/', $content, $matches ) ) {
+	private function determine_cover_edition_name( string $href, string $src ) : string {
+		$link_url = wp_parse_url( $href );
+		if ( preg_match( '~\Apdf-([a-zA-Z0-9-]+)(?:/|\z)~', $link_url['fragment'] ?? '', $matches ) ) {
 			$slug_parts = explode( '-', $matches[1] );
 			if ( count( $slug_parts ) === 3 && is_numeric( $slug_parts[2] ) ) {
 				return ucfirst( $slug_parts[0] ) . '/' . ucfirst( $slug_parts[1] ) . ' ' . $slug_parts[2];
@@ -151,25 +269,13 @@ class Component implements Component_Interface {
 			return ucwords( str_replace( '-', ' ', $matches[1] ) );
 		}
 
-		if ( preg_match( '/CCL_([A-Za-z]+)(\d{4})/i', $content, $matches ) ) {
+		$image_url = wp_parse_url( $src );
+		$segments  = explode( '/', $image_url['path'] ?? '' );
+		$filename  = end( $segments );
+		if ( preg_match( '/CCL_([A-Za-z]+)(\d{4})/i', $filename, $matches ) ) {
 			return $matches[1] . ' ' . $matches[2];
 		}
 
 		return '';
-	}
-
-	/**
-	 * Sets or updates the alt attribute in an HTML snippet containing an <img> tag.
-	 *
-	 * @param string $html     HTML snippet.
-	 * @param string $alt_text Descriptive alt text to set.
-	 * @return string Updated HTML snippet.
-	 */
-	protected function set_image_alt_attribute( string $html, string $alt_text ) : string {
-		if ( preg_match( '/alt=(["\'])\s*\1/', $html ) ) {
-			return preg_replace( '/alt=(["\'])\s*\1/', 'alt="' . esc_attr( $alt_text ) . '"', $html );
-		}
-
-		return preg_replace( '/<img\b/', '<img alt="' . esc_attr( $alt_text ) . '"', $html );
 	}
 }
