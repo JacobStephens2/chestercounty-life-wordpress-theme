@@ -51,6 +51,25 @@ class Magazine_Cover_Tests extends Integration_Test_Case {
 	}
 
 	/**
+	 * A wrapper without Image block props cannot mark an image as a cover.
+	 */
+	public function test_nonlegacy_wrapper_passes_through() {
+		$this->visit_context( 'front' );
+		$markup = '<div class="front_cover"><figure class="wp-block-image"><img src="/cover.jpg" alt="" sizes="100vw" /></figure></div>';
+		$this->assertSame( $markup, do_blocks( $this->image_block( $markup ) ) );
+	}
+
+	/**
+	 * A directory name cannot supply the edition in place of a filename.
+	 */
+	public function test_directory_url_does_not_supply_cover_edition() {
+		$this->visit_context( 'front' );
+		$markup   = '<figure class="wp-block-image front_cover"><img src="/CCL_July2026/" alt="" /></figure>';
+		$expected = '<figure class="wp-block-image front_cover"><img src="/CCL_July2026/" alt="Chester County Life Current Edition Magazine Cover" /></figure>';
+		$this->assertSame( $expected, do_blocks( $this->image_block( $markup ) ) );
+	}
+
+	/**
 	 * A caption and URL query can contain edition lookalikes.
 	 */
 	public function test_current_edition_ignores_caption_and_url_lookalikes() {
@@ -130,17 +149,8 @@ class Magazine_Cover_Tests extends Integration_Test_Case {
 	 * @param string $context Request context.
 	 */
 	private function visit_context( string $context ) {
-		$front_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
-		$posts_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
-		$post_id  = self::factory()->post->create();
-		update_option( 'show_on_front', 'page' );
-		update_option( 'page_on_front', $front_id );
-		update_option( 'page_for_posts', $posts_id );
-		$urls = array(
-			'front' => get_permalink( $front_id ),
-			'posts' => get_permalink( $posts_id ),
-			'post'  => get_permalink( $post_id ),
-		);
+		$urls         = $this->set_up_static_homepage();
+		$urls['post'] = get_permalink( self::factory()->post->create() );
 		$this->go_to( $urls[ $context ] );
 		$this->assertSame( 'front' === $context, is_front_page() );
 		$this->assertSame( 'posts' === $context, is_home() );

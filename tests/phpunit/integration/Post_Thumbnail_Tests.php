@@ -363,16 +363,8 @@ class Post_Thumbnail_Tests extends Integration_Test_Case {
 	 * @param int    $post_id Post to render on the static front page.
 	 */
 	private function visit_context( string $context, int $post_id ) {
-		$front_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
-		$posts_id = self::factory()->post->create( array( 'post_type' => 'page' ) );
-		update_option( 'show_on_front', 'page' );
-		update_option( 'page_on_front', $front_id );
-		update_option( 'page_for_posts', $posts_id );
-		$urls = array(
-			'front'   => get_permalink( $front_id ),
-			'posts'   => get_permalink( $posts_id ),
-			'archive' => get_category_link( 1 ),
-		);
+		$urls            = $this->set_up_static_homepage();
+		$urls['archive'] = get_category_link( 1 );
 		$this->go_to( $urls[ $context ] );
 		$this->assertSame( 'front' === $context, is_front_page() );
 		$this->assertSame( 'posts' === $context, is_home() );

@@ -199,8 +199,12 @@ REGEX;
 			return null;
 		}
 
-		$marker = '/(?:\A|[ \t\r\n\f])front_cover(?:\z|[ \t\r\n\f])/';
-		if ( ! preg_match( $marker, $figure['class']['value'] ?? '' ) && ! preg_match( $marker, $container['class']['value'] ?? '' ) ) {
+		$class_separator   = '/[ \t\r\n\f]+/';
+		$figure_classes    = preg_split( $class_separator, $figure['class']['value'] ?? '' );
+		$container_classes = preg_split( $class_separator, $container['class']['value'] ?? '' );
+		$marked_container  = in_array( 'wp-block-image', $container_classes, true )
+			&& in_array( 'front_cover', $container_classes, true );
+		if ( ! in_array( 'front_cover', $figure_classes, true ) && ! $marked_container ) {
 			return null;
 		}
 
@@ -266,12 +270,12 @@ REGEX;
 		}
 
 		$image_url = wp_parse_url( $src );
-		$filename  = basename( $image_url['path'] ?? '' );
+		$segments  = explode( '/', $image_url['path'] ?? '' );
+		$filename  = end( $segments );
 		if ( preg_match( '/CCL_([A-Za-z]+)(\d{4})/i', $filename, $matches ) ) {
 			return $matches[1] . ' ' . $matches[2];
 		}
 
 		return '';
 	}
-
 }
