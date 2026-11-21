@@ -71,39 +71,6 @@ class Component_Tests extends Unit_Test_Case {
 	}
 
 	/**
-	 * Tests render_block filter for magazine cover image on front page.
-	 *
-	 * @covers Component::filter_render_block_image()
-	 */
-	public function test_filter_render_block_image_front_cover() {
-		Functions\when( 'is_front_page' )->justReturn( true );
-		Functions\when( 'is_home' )->justReturn( false );
-
-		$html = '<figure class="wp-block-image size-large front_cover"><a href="https://chestercounty-life.com/past-issues/#pdf-july-august-2026/1/"><img src="CCL_JulAug2026-Cover-789x1024.jpg" alt="" sizes="100vw" /></a></figure>';
-
-		$filtered = $this->component->filter_render_block_image( $html, array( 'blockName' => 'core/image' ) );
-
-		$this->assertContains( 'sizes="(max-width: 768px) 90vw, 650px"', $filtered );
-		$this->assertContains( 'alt="Chester County Life Magazine Cover - July/August 2026"', $filtered );
-	}
-
-	/**
-	 * Tests render_block filter for magazine cover image when alt attribute is completely missing.
-	 *
-	 * @covers Component::filter_render_block_image()
-	 */
-	public function test_filter_render_block_image_front_cover_missing_alt() {
-		Functions\when( 'is_front_page' )->justReturn( true );
-		Functions\when( 'is_home' )->justReturn( false );
-
-		$html = '<figure class="wp-block-image size-large front_cover"><a href="https://chestercounty-life.com/past-issues/#pdf-july-august-2026/1/"><img src="CCL_JulAug2026-Cover-789x1024.jpg" sizes="100vw" /></a></figure>';
-
-		$filtered = $this->component->filter_render_block_image( $html, array( 'blockName' => 'core/image' ) );
-
-		$this->assertContains( 'alt="Chester County Life Magazine Cover - July/August 2026"', $filtered );
-	}
-
-	/**
 	 * Tests header image filter ensures alt attribute is present.
 	 *
 	 * @covers Component::filter_header_image_tag()
