@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add the approved homepage layout using the editable issue cover, flipbook link, and edition article tags.
+
 ## 2.0.2
 - Use HTTPS and a checked version when the Travis integration job checks out WordPress. See [#4](https://github.com/JacobStephens2/chestercounty-life-wordpress-theme/issues/4).
 - Removed native lazy loading. WordPress 5.5 now handles that for us. See [#657](https://github.com/wprig/wprig/pull/657).  Props @robruiz.
