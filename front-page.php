@@ -12,28 +12,6 @@ namespace WP_Rig\WP_Rig;
 use WP_HTML_Tag_Processor;
 
 /**
- * Find the cover image block in the existing homepage content.
- *
- * @param array $blocks Parsed homepage blocks.
- * @return array|null The cover block when present.
- */
-function ccl_home_cover_block( array $blocks ) {
-	foreach ( $blocks as $block ) {
-		$classes = preg_split( '/[ \t\r\n\f]+/', $block['attrs']['className'] ?? '' );
-		if ( 'core/image' === $block['blockName'] && in_array( 'front_cover', $classes, true ) ) {
-			return $block;
-		}
-
-		$cover = ccl_home_cover_block( $block['innerBlocks'] ?? array() );
-		if ( $cover ) {
-			return $cover;
-		}
-	}
-
-	return null;
-}
-
-/**
  * Render feature links in the same order as the edition's publishing tags.
  *
  * @param int  $tag     The current or recent edition tag ID.
@@ -103,27 +81,15 @@ function ccl_home_edition_layout( string $html, array $block ) : string {
 		return $html;
 	}
 
-	$cover = ccl_home_cover_block( $block['innerBlocks'] ?? array() );
-	if ( ! $cover ) {
+	$cover = Magazine_Cover::resolve_saved_cover( $block );
+	if ( null === $cover ) {
 		return $html;
 	}
 
-	$cover_markup = new WP_HTML_Tag_Processor( $cover['innerHTML'] ?? '' );
-	if ( ! $cover_markup->next_tag( 'a' ) ) {
-		return $html;
-	}
-
-	$issue_url = esc_url_raw( $cover_markup->get_attribute( 'href' ) ?? '' );
-	$cover_id  = (int) ( $cover['attrs']['id'] ?? 0 );
-	if ( ! $issue_url || ! $cover_id ) {
-		return $html;
-	}
-
-	$fragment = wp_parse_url( $issue_url, PHP_URL_FRAGMENT );
-	preg_match( '/^pdf-([a-z0-9-]+)(?:\/|$)/i', $fragment ?? '', $matches );
-	$slug  = $matches[1] ?? '';
-	$issue = $slug ? get_page_by_path( $slug, OBJECT, 'dearpdf' ) : null;
-	$title = $issue && 'publish' === $issue->post_status ? get_the_title( $issue ) : '';
+	$issue_url = $cover['url'];
+	$slug      = $cover['slug'];
+	$issue     = $slug ? get_page_by_path( $slug, OBJECT, 'dearpdf' ) : null;
+	$title     = $issue && 'publish' === $issue->post_status ? get_the_title( $issue ) : '';
 
 	if ( ! $title && preg_match( '/^([a-z]+)-([a-z]+)-(\d{4})$/', $slug, $date ) ) {
 		$title = ucfirst( $date[1] ) . '/' . ucfirst( $date[2] ) . ' ' . $date[3];
@@ -131,13 +97,13 @@ function ccl_home_edition_layout( string $html, array $block ) : string {
 
 	// This number belongs to the approved issue. Later covers publish without it.
 	$eyebrow = 'september-october-2026' === $slug ? __( 'Current edition · No. 125', 'wp-rig' ) : __( 'Current edition', 'wp-rig' );
-	$alt     = $cover_markup->next_tag( 'img' ) ? trim( (string) $cover_markup->get_attribute( 'alt' ) ) : '';
+	$alt     = $cover['alt'];
 	if ( '' === $alt ) {
 		/* translators: %s: issue title. */
 		$alt = $title ? sprintf( __( 'Read the %s Chester County Life issue', 'wp-rig' ), $title ) : __( 'Read the current Chester County Life issue', 'wp-rig' );
 	}
 	$image = wp_get_attachment_image(
-		$cover_id,
+		$cover['attachment_id'],
 		'large',
 		false,
 		array(
